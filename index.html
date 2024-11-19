@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Mobile Calculator</title>
+  <meta name='Description' content='Mobile Calculator' />
+  <meta name='version' content='1.0.0' />
+  <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no viewport-fit=cover' />
+  <meta name='theme-color' content='#000000' />
+  <meta name='mobile-web-app-capable' content='yes' />
+  <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
+  <meta name='apple-mobile-web-app-title' content='Calculator' />
+  <meta name='copyright' content='copyright 2021 ABC Company' />
+  <meta http-equiv='Content-Security-Policy' content="default-src * file:; style-src 'self' 'unsafe-inline' *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; img-src 'self' data:;" />
+  <script src="cordova.js"></script>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    #calculator {
+      width: 100vw; /* Full width */
+      height: 100vh; /* Full height */
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    #display {
+      background: #444;
+      color: #fff;
+      font-size: 2em;
+      padding: 20px;
+      text-align: right;
+      height: 20%; /* Fixed height for the display */
+      width: 100%;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+      border-radius: 10px;
+    }
+    #buttondisplay {
+      width: 100%;
+      height: 80%; /* Occupies 80% of the calculator */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* Adjusted to space rows equally */
+      align-items: center;
+      padding: 0;
+     
+    }
+    .button-row {
+      display: flex;
+      width: 100%;
+      height: calc(100% / 5); /* Equal height for each button row */
+    }
+    .button {
+      flex: 1;
+      display: flex; /* Added flexbox properties */
+      justify-content: center; /* Center horizontally */
+      align-items: center; /* Center vertically */
+      margin: 5px;
+      background: #333;
+      color: #fff;
+      text-align: center;
+      font-size: 1.7em;
+      border-radius: 5px;
+      user-select: none;
+    }
+    .button.operation {
+      background: #ff9500;
+    }
+    .button.zero {
+      flex: 2;
+    }
+  </style>
+</head>
+<body>
+  <div id="calculator">
+    <div id="display">0</div>
+    <div id="buttondisplay">
+      <div class="button-row">
+        <div class="button" onclick="pressKey('7')">7</div>
+        <div class="button" onclick="pressKey('8')">8</div>
+        <div class="button" onclick="pressKey('9')">9</div>
+        <div class="button operation" onclick="pressKey('/')">/</div>
+      </div>
+      <div class="button-row">
+        <div class="button" onclick="pressKey('4')">4</div>
+        <div class="button" onclick="pressKey('5')">5</div>
+        <div class="button" onclick="pressKey('6')">6</div>
+        <div class="button operation" onclick="pressKey('*')">*</div>
+      </div>
+      <div class="button-row">
+        <div class="button" onclick="pressKey('1')">1</div>
+        <div class="button" onclick="pressKey('2')">2</div>
+        <div class="button" onclick="pressKey('3')">3</div>
+        <div class="button operation" onclick="pressKey('-')">-</div>
+      </div>
+      <div class="button-row">
+        <div class="button zero" onclick="pressKey('0')">0</div>
+        <div class="button" onclick="pressKey('.')">.</div>
+        <div class="button operation" onclick="pressKey('+')">+</div>
+      </div>
+      <div class="button-row">
+        <div class="button" onclick="clearDisplay()">C</div>
+        <div class="button operation" onclick="calculateResult()">=</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('deviceready', onDeviceReady, false);
+
+    function onDeviceReady() {
+      console.log('Cordova is initialized.');
+    }
+
+    let displayValue = '0'; 
+
+const operators = ['/', '*', '-', '+'];
+
+function updateDisplay() {
+  const display = document.getElementById('display');
+  display.innerText = displayValue;
+}
+
+function isOperator(char) {
+  return operators.includes(char);
+}
+
+function pressKey(key) {
+  if (displayValue === '0' && !isOperator(key)) {
+    displayValue = key;
+  } else {
+    const lastChar = displayValue.slice(-1);
+    if (isOperator(lastChar) && isOperator(key)) {
+      if (key === '-' && lastChar !== '-') {
+        displayValue += key;
+      } else if (key !== '-') {
+        displayValue = displayValue.slice(0, -1) + key;
+      }
+    } else {
+      displayValue += key;
+    }
+  }
+  updateDisplay();
+}
+
+function clearDisplay() {
+  displayValue = '0';
+  updateDisplay();
+}
+
+function calculateResult() {
+  try {
+    displayValue = eval(displayValue).toString();
+  } catch (e) {
+    displayValue = 'Error';
+  }
+  updateDisplay();
+}
+
+  </script>
+</body>
+</html>
