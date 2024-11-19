@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memorial Stories</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/story.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <style>
+   
+
+    </style>
+</head>
+
+<body>
+    <nav  class="customnav">
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <label class="logo">Liam James Payne</label>
+        <ul>
+            <li><a class="dropdown-item" href="index.html">Home</a></li>
+            <li><a class="dropdown-item" href="about.html">About</a></li>
+            <li><a class="dropdown-item" href="photo.html">Photo Gallery</a></li>
+            <li><a class="active" href="stories.html">Memorial Stories</a></li>
+        </ul>
+    </nav>
+
+    <h1>Memorial Stories</h1>
+    <hr>
+
+    <!-- Story Submission Form -->
+    <div class="story-form">
+        <h2>Share Your Story</h2>
+        <form id="storyForm">
+            <textarea name="story" rows="4" placeholder="Write your story here..." required></textarea>
+            <input type="text" name="name" placeholder="Your name (optional)" />
+            <button type="submit">Submit Story</button>
+        </form>
+    </div>
+
+    <!-- Displaying Memorial Stories -->
+    <div id="stories-list">
+        <h2>Memorial Stories</h2>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Check if stories already exist in localStorage
+            if (!localStorage.getItem("stories")) {
+                const initialStories = [
+                    { text: "Liam was an inspiration to so many. His kindness and talent will never be forgotten.", author: "John Doe" },
+                    { text: "I remember seeing him live; it was one of the best days of my life.", author: "Jane Smith" },
+                    { text: "Liam's music helped me through tough times. He will always be in our hearts.", author: "Alex" }
+                ];
+                localStorage.setItem("stories", JSON.stringify(initialStories));
+            }
+    
+            displayStories();
+    
+            // Handle form submission for new stories
+            const form = document.getElementById("storyForm");
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+                const storyText = form.story.value.trim();
+                const authorName = form.name.value.trim() || "Anonymous";
+    
+                if (storyText) {
+                    const newStory = { text: storyText, author: authorName };
+                    saveStory(newStory);
+                    displayStories();
+                    form.reset();
+                }
+            });
+        });
+    
+        // Function to save a new story to localStorage
+        function saveStory(story) {
+            const stories = JSON.parse(localStorage.getItem("stories")) || [];
+            stories.push(story);
+            localStorage.setItem("stories", JSON.stringify(stories));
+        }
+    
+        // Function to display all stories
+        function displayStories() {
+            const storiesList = document.getElementById("stories-list");
+            const stories = JSON.parse(localStorage.getItem("stories")) || [];
+    
+            storiesList.innerHTML = "<h2>Memorial Stories</h2>";
+    
+            stories.forEach((story) => {
+                const storyItem = document.createElement("div");
+                storyItem.classList.add("story-item");
+                storyItem.innerHTML = `
+                    <h3>${story.author}</h3>
+                    <p>${story.text}</p>
+                `;
+                storiesList.appendChild(storyItem);
+            });
+        }
+    </script>
+    
+</body>
+</html>

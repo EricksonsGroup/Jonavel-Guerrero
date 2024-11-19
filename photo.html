@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Photo Gallery</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/photo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    
+</head>
+
+<body class="photo-gallery-body">
+    <!-- Navigation Bar -->
+    <nav class="customnav">
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <label class="logo">Liam James Payne</label>
+        <ul>
+            <li><a class="dropdown-item" href="index.html">Home</a></li>
+            <li><a class="dropdown-item" href="about.html">About</a></li>
+            <li><a class="active" href="photo.html">Photo Gallery</a></li>
+            <li><a class="dropdown-item" href="stories.html">Memorial Stories</a></li>
+        </ul>
+    </nav>
+
+    <h1>Photo Gallery</h1>
+    <hr>
+    <br>
+
+    <!-- Photo Section -->
+    <div class="photo">
+        <!-- Photo Item 1 -->
+        <div class="photo-item-container">
+            <img src="images/photo1.jpg" alt="Memory 1" onclick="openModal(this)">
+            <p class="photo-item-description">Liam gained worldwide fame as a member of One Direction, formed on the reality TV show The X Factor UK in 2010. The group quickly became one of the best-selling boy bands, releasing five albums and embarking on four world tours. Their hits include songs like What Makes You Beautiful, Story of My Life, and Drag Me Down.</p>
+        </div>
+
+        <!-- Photo Item 2 -->
+        <div class="photo-item-container">
+            <img src="images/photo2.jpg" alt="Memory 2" onclick="openModal(this)">
+            <p class="photo-item-description">After One Direction went on hiatus in 2016, Liam launched his solo career. He released several singles, including Strip That Down (featuring Quavo), which became a major hit globally, followed by songs like Bedroom Floor, Get Low (with Zedd), and Familiar (featuring J Balvin). His debut solo album, LP1, was released in 2019.</p>
+        </div>
+
+        <!-- Photo Item 3 -->
+        <div class="photo-item-container">
+            <img src="images/photo3.jpg" alt="Memory 3" onclick="openModal(this)">
+            <p class="photo-item-description">Liam has been involved in songwriting not only for his solo projects but also contributed to One Direction's music, co-writing songs for their albums. He has collaborated with other artists and songwriters, honing his skills as both a singer and songwriter.</p>
+        </div>
+
+        <!-- Photo Item 4 -->
+        <div class="photo-item-container">
+            <img src="images/photo4.jpg" alt="Memory 4" onclick="openModal(this)">
+            <p class="photo-item-description">Liam has supported various charitable causes and organizations. He has worked with UNICEF, War Child, and the Trussell Trust, among others. During the COVID-19 pandemic, he also contributed to relief efforts, using his platform to raise awareness for important causes.</p>
+        </div>
+
+        <!-- Photo Item 5 -->
+        <div class="photo-item-container">
+            <img src="images/photo5.jpg" alt="Memory 5" onclick="openModal(this)">
+            <p class="photo-item-description">Liam has ventured into the fashion industry, collaborating with brands and appearing in fashion campaigns. He has also expressed interest in other creative fields and has worked on diverse projects beyond music.</p>
+        </div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="imageModal" class="modal" style="display: none; position: fixed; z-index: 10; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); align-items: center; justify-content: center;">
+        <span class="close" onclick="closeModal()" style="position: absolute; top: 10px; right: 20px; color: #fff; font-size: 30px; font-weight: bold; cursor: pointer;">&times;</span>
+        <div class="modal-content" style="max-width: 90%; max-height: 90%;">
+            <img id="modalImage" src="" alt="" style="width: 100%; height: auto; border-radius: 10px;">
+        </div>
+    </div>
+
+    <script>
+        // Function to open the modal and display the clicked image
+        function openModal(imgElement) {
+            const modal = document.getElementById("imageModal");
+            const modalImage = document.getElementById("modalImage");
+            modal.style.display = "flex";
+            modalImage.src = imgElement.src;
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            const modal = document.getElementById("imageModal");
+            modal.style.display = "none";
+        }
+
+        // Close the modal when clicking outside the modal content
+        window.onclick = function(event) {
+            const modal = document.getElementById("imageModal");
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
