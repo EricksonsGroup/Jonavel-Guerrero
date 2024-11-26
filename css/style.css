@@ -31,7 +31,8 @@ hr {
   background: #000000;
   height: 80px;
   width: 100%;
-  
+  position:sticky;
+  top: 0;
   
 }
 
