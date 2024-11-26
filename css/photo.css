@@ -1,3 +1,7 @@
+h1 {
+    color: white;
+}
+
 body::before {
     content: "";
     position: fixed;
@@ -5,7 +9,23 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../images/photo6.jpg');
+    background-image: url('../images/photo2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    filter: grayscale(80%);
+    z-index: -1; /* Place behind other content */
+  }
+
+  /* Grayscale Background Image */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/photo2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -41,7 +61,7 @@ body::before {
         flex-direction: row;
         align-items: center;
         gap: 20px;
-        background-color: #fff;
+        background-color: rgba(0, 0, 0, 0.24); /* Semi-transparent dark background for contrast */
         border-radius: 10px;
         padding: 15px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -53,7 +73,7 @@ body::before {
         width: 100%;
         max-width: 200px;
         border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 8px rgba(253, 250, 250, 0.986);
         cursor: pointer;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
@@ -66,7 +86,7 @@ body::before {
     /* Description Styling with Max Height and Scroll */
     .photo-item-description {
         font-size: 1rem;
-        color: #555;
+        color: #fff8f8;
         flex-grow: 1;
         padding-left: 15px;
         max-height: 170px; /* Set max height */
